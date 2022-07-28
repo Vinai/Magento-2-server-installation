@@ -279,7 +279,7 @@ if [[ "${OS_DISTRO_KEY}" =~ (redhat|amazon) ]]; then
 fi
 
 # check if you need update
-MD5_NEW=$(curl -sL ${MAGENX_BASE} > magenx.sh.new && md5sum magenx.sh.new | awk '{print $1}')
+MD5_NEW=$(curl -sL ${MAGENX_BASE} | sed 's/^curl --silent/#curl --silent/' > magenx.sh.new && md5sum magenx.sh.new | awk '{print $1}')
 MD5=$(md5sum ${SELF} | awk '{print $1}')
  if [[ "${MD5_NEW}" == "${MD5}" ]]; then
    GREENTXT "PASS: INTEGRITY CHECK FOR '${SELF}' OK"
